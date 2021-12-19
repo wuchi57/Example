@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP</title>
+    <style>
+        body {
+            background-color: #eee;
+        }
+        .info {
+            display: block;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="info">
+    <h1>高德IP定位</h1>
+    <h3>消息: &nbsp;<span id="info"></span></h3>
+    <h3>城市：<span id="city"></span></h3>
+    <h3>省份：<span id="province"></span></h3>
+    </div>
+
+<script>
+    var key = "dd147bbfd943c2665c54ca41d85c8790"
+    var url = "https://restapi.amap.com/v3/ip?output=json&key=" + key;
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.send();
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+        var jsonObject = JSON.parse(xhr.responseText);
+        document.getElementById("info").innerHTML = jsonObject.info;
+        document.getElementById("city").innerHTML = jsonObject.city;
+        document.getElementById("province").innerHTML = jsonObject.province;
+    }};
+
+</script>
+</body>
+</html>

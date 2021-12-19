@@ -3,5 +3,6 @@
 
 #### Calendar: 如何写一个日历
 #### CSSBackdropFilter: 磨砂玻璃效果个人简介
-#### Weather: 添加获取天气示例
-#### VoiceAPI: 添加获取在线语音API
+#### Weather: 获取天气示例
+#### VoiceAPI: 获取在线语音API
+#### AmapIP: 高德IP定位
