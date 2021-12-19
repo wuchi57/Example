@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .card {
+            display: inline-block;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px;
+            box-shadow: 0px 0px 14px rgba(0,0,0,0.3);
+            color: #fe6a00;
+            background-color: #fff;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<script>
+    let search = "shenzhen"
+    let key = "ef3821d028324e1f9abaac98b15a2a5c"
+
+    function getLocation(location, key) {
+        let url = "https://geoapi.qweather.com/v2/city/lookup?location=" + location + "&key=" + key
+        return fetch(url).then(res => res.json())
+    }
+    function getWeather(id, key) {
+        let url = 'https://devapi.qweather.com/v7/weather/3d?location=' + id + '&key=' + key
+        return fetch(url).then(res => res.json())
+    }
+
+    async function getData() {
+        let result = await getLocation(search, key)
+        let id = result.location[0].id
+        result = await getWeather(id, key)
+        let str = ''
+        for (const day of result.daily) {
+            str += `
+<div class="card">
+    <img src="./weather-icon/color-128/${day.iconDay}.png" alt="icon">
+    <p>日期: ${day.fxDate}</p>
+    <p>天气: ${day.textDay}</p>
+    <p>温度: ${day.tempMin} ~ ${day.tempMax} °C</p>
+    <p>湿度: ${day.humidity} %</p>
+</div>
+            `
+        }
+        let body = document.querySelector('body')
+        body.innerHTML = str
+    }
+    getData()
+
+</script>
+</body>
+</html>
