@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar Demo</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            width: 50%;
+            padding-top: 30px;
+            margin: 0 auto;
+        }
+        .calendar {
+            width: 450px;
+            height: 370px;
+            background: #ffffff;
+            border-radius: 3px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.3);
+        }
+        .title {
+            text-align: center;
+            border-bottom: #eee 2px solid;
+            position: relative;
+            padding: 10px;
+
+        }
+        .title a {
+            position: absolute;
+            display: block;
+            width: 40px;
+            height: 40px;
+            padding: 3px;
+        }
+        #prev {
+            text-decoration: none; 
+            top: 18px;
+            left: 18px;
+        }
+        #next {
+            text-decoration: none; 
+            top: 18px;
+            right: 18px;
+        }
+        #prev::after {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            margin: 12px;
+            border-left: #a8a8a8 solid 3px;
+            border-bottom: #a8a8a8 solid 3px;
+            border-radius: 2px;
+            transform: rotate(45deg);
+        }
+        #next::after {
+            content: '';
+            display: block;
+            width: 12px;
+            height: 12px;
+            margin: 12px;
+            border-right: #a8a8a8 solid 3px;
+            border-top: #a8a8a8 solid 3px;
+            border-radius: 2px;
+            transform: rotate(45deg);
+        }
+        .body {
+            padding: 10px;
+        }
+        .body-list ul {
+            width: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .body-list ul li {
+            width: 14.28%;
+            height: 40px;
+            line-height: 40px;
+            list-style-type: none;
+            display: block;
+            box-sizing: border-box;
+            float: left;
+            text-align: center;
+        }
+        .light-grey { color: #a8a8a8;}
+        .dark-grey { color: #565656;}
+        .green { color: #6ac13c;}
+        .green-box {
+            border: 1px solid #6ac13c; 
+            border-radius: 3px;
+            background: #e9f8df;
+         }
+    </style>
+</head>
+<body>
+
+    <h3><a href="https://www.cnblogs.com/zhsh666/p/11380873.html">参考网站</a>
+    </h3><br><br>
+
+    <h3 id="demo" style="display:block; width: 450px; color:#555; margin-bottom: 10px; text-align: right;">12:30:30</h3>
+
+    <div class="calendar">
+        <div class="title">
+            <h1 class="green" id="calendar-title">Month</h1>
+            <h3 class="green small" id="calendar-year">Year</h3>
+            <a href="" id="prev"></a>
+            <a href="" id="next"></a>
+        </div>
+        <div class="body">
+            <div class="light-grey body-list">
+                <ul>
+                    <li>MON</li>
+                    <li>TUE</li>
+                    <li>WED</li>
+                    <li>THU</li>
+                    <li>FRI</li>
+                    <li>SAT</li>
+                    <li>SUN</li>
+                </ul>
+            </div>
+            <div class="dark-grey body-list">
+                <ul id="days">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<script>
+    var myVar = setInterval(myTimer, 1000);
+
+    function myTimer() {
+        var d = new Date();
+        var hour = d.getHours();
+        var minute = d.getMinutes();
+        var second = d.getSeconds();
+
+        if (hour < 10) hour = "0" + hour;
+        if (minute < 10) minute = "0" + minute;
+        if (second < 10) second = "0" + second;
+
+        document.getElementById("demo").innerHTML = hour+":"+minute+":"+second;
+    }
+
+    var month_olympic = 
+    [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var month_normal = 
+    [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    var month_name =
+    ["Januaryy", "Febrary", "March", "April", "May", "June", 
+     "July", "Auguest", "September", "October", "Novermber", "December"]
+
+    var holder = document.getElementById("days");
+    var prev = document.getElementById("prev");
+    var next = document.getElementById("next");
+    var ctitle = document.getElementById("calendar-title");
+    var cyear = document.getElementById("calendar-year");
+    
+    var my_date =  new Date();
+    var my_year = my_date.getFullYear();
+    var my_month = my_date.getMonth();
+    var my_day = my_date.getDate();
+
+    function dayStart(month, year) {
+        var tmpDate = new Date(year, month, 1);
+        return (tmpDate.getDay());
+    }
+
+    function daysMonth(month, year) {
+        var tmp = year % 4;
+        if (tmp == 0)   
+            return (month_olympic[month]);
+        else 
+            return (month_normal[month]);
+    }
+
+    function refreshDate() {
+        var str = "";
+        var totalDay = daysMonth(my_month, my_year)
+        var firstDay = dayStart(my_month, my_year)
+        var myclass;
+        for (var i=1; i<firstDay; i++) {
+            str += "<li></li>";
+        }
+        for(var i=1; i<=totalDay; i++) {
+            if (( i<my_day && my_year==my_date.getFullYear() && my_month==my_date.getMonth() ) || 
+                ( my_year<my_date.getFullYear() ) ||
+                ( my_year==my_date.getFullYear() && my_month<my_date.getMonth() ) )   
+             {
+                    myclass = " class='light-grey'";
+             }
+             else if (i==my_day && my_year==my_date.getFullYear() && my_month==my_date.getMonth() )
+             {
+                myclass = " class='green green-box'";
+             }
+             else
+             {
+                 myclass = " class='dark-grey'";
+             }
+             str += "<li"+myclass+">"+i+"</li>";
+        }
+        holder.innerHTML = str;
+        ctitle.innerHTML = month_name[my_month];
+        cyear.innerHTML = my_year;
+    }
+    refreshDate();
+
+    prev.onclick = function(e) {
+        e.preventDefault();
+        my_month--;
+        if (my_month<0) {
+            my_year--;
+            my_month = 11;
+        }
+        refreshDate();
+    }
+    next.onclick = function(e) {
+        e.preventDefault();
+        my_month++;
+        if (my_month>11) {
+            my_year++;
+            my_month = 0;
+        }
+        refreshDate();
+    }
+</script>
+</body>
+</html>
