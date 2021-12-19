@@ -6,3 +6,4 @@
 #### Weather: 获取天气示例
 #### VoiceAPI: 获取在线语音API
 #### AmapIP: 高德IP定位
+#### AmapLayer: 高德默认图层
