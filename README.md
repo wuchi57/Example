@@ -7,3 +7,4 @@
 #### VoiceAPI: 获取在线语音API
 #### AmapIP: 高德IP定位
 #### AmapLayer: 高德默认图层
+#### District: 行政区域级联选择
