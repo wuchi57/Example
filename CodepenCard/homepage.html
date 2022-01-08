@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="card">
+    <svg id="fullscreen" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path  d="M21.414 18.586l2.586-2.586v8h-8l2.586-2.586-5.172-5.172 2.828-2.828 5.172 5.172zm-13.656-8l2.828-2.828-5.172-5.172 2.586-2.586h-8v8l2.586-2.586 5.172 5.172zm10.828-8l-2.586-2.586h8v8l-2.586-2.586-5.172 5.172-2.828-2.828 5.172-5.172zm-8 13.656l-2.828-2.828-5.172 5.172-2.586-2.586v8h8l-2.586-2.586 5.172-5.172z"/></svg>
+    <svg id="menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 12c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zm9 0c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zm9 0c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z"/></svg>
+    <div class="background"></div>
+    <div class="image"></div>
+    <div class="description">
+        <div class="author">
+            <div class="avatar"></div>
+            <div class="title">title</div>
+        </div>
+        <div class="icon">write some description here write some description here </div>
+    </div>
+</div>
+
+<style>
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+    }
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .card {
+        position: relative;
+        display: inline-block;
+        margin: 10px;
+        width: 380px;
+        height: 312px;
+        /*background-color: #ddd;*/
+        /*border-radius: 10px;*/
+        /*font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, sans-serif;*/
+    }
+    .background {
+        position: absolute;
+        width: 85%;
+        height: 85%;
+        top: 20px;
+        right: 0;
+        background-color: #ddd;
+        border-radius: 10px;
+        z-index: -1;
+        transition: all .25s;
+    }
+    .card:hover .background {
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .image {
+        display: inline-block;
+        width: 350px;
+        height: 196px;
+        background-color: #ccc;
+        margin: 15px;
+        border-radius: 5px;
+    }
+    .author {
+        width: 350px;
+        height: 40px;
+        background-color: #ccf;
+        margin: auto;
+        font-size: 0;
+        border-radius: 3px;
+    }
+    .icon {
+        width: 350px;
+        height: 26px;
+        background-color: #9ac;
+        margin: 8px auto;
+        line-height: 26px;
+        color: rgba(4, 4, 4, 0.8);
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .avatar {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        background-color: #abc;
+        border-radius: 3px;
+        vertical-align: bottom;
+        margin-right: 15px;
+    }
+    .title {
+        width: 230px;
+        height: 40px;
+        display: inline-block;
+        background-color: #fff;
+        font-size: 20px;
+        line-height: 40px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    #fullscreen {
+        fill: rgba(0, 0, 0, 0);
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        transition: fill .25s;
+        z-index: 99;
+        cursor: pointer;
+    }
+    .card:hover #fullscreen {
+        fill: rgba(0, 0, 0, 0.2);
+    }
+    #menu {
+        position: absolute;
+        fill: rgba(0, 0, 0, 0.5);
+        top: 238px;
+        right: 30px;
+    }
+</style>
+</body>
+</html>
